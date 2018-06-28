@@ -1,27 +1,24 @@
 extends layout
 
 block content
-  div.container-responsive
-    div.content
-      h1 Add List
-      p total number of items #{count}
-      div.form-group
-        form.form-horizontal(action='/result/', method='post')
+  div(class="container-fluid" id="cont")
+    h1 Add List
+    p total number of items #{count}. Please Add the items
+        form(class="form-horizontal" action='/result/', method='post')
           input(class="form-control" type='number', name='count' value= count, hidden)
-
           - var n = 0;
           while ++n <= count
             - var name = "item"+n
             - var price = "price"+n
             - var slab = "slab"+n
-            div.row
-              div.col
+            div(class="row")
+              div(class="col-md-4")
                 lable Name:
                 input(class='form-control', type='text', name= name)
-              div.col
+              div(class="col-md-4")
                 lable Price:
                 input(class='form-control', type='number', name= price)
-              div.col
+              div(class="col-md-4")
                 lable GST Slab:
                 select(class='form-control' name= slab)
                   option(value=5) 5%

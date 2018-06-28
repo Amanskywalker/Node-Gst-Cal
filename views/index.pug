@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  div.container
-    div.content
-      h1= title
-      p Welcome to #{title}
-      div.form-group
-        form.form-horizontal(action='/items/', method='post')
+  div(class="container-fluid" id="cont")
+    h1= title
+    p Welcome to #{title}
+    p Please enter the number of items
+      form(class="form-horizontal" action='/items/', method='post')
+        div(class="form-group col-md-4")
           lable Number of items:
           input(class='form-control', type='number', name='numbers', value='')
-          br
+        div(class="form-group col-md-4")
           input(class="btn btn-primary" type='submit', value='Submit')

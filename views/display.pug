@@ -1,18 +1,62 @@
 extends layout
 
 block content
-  div.container-responsive
-    div.content
-      h1= title
-      p total number of items #{ubody}
-      div.table-group
-        p
+  div(class="container-fluid text-center" id="cont")
+    h1= title
+    p #{timestamp}
+    div(class="row")
+      div(class="col-md-8")
+        table(class="table table-hover")
+          tr
+            th Name
+            th Price
+            th GST Slab
+            th GST
+            th Total
           - var count = rbody.count
           - var i = 0
-          while i++ <= count
+          while i++ < count
             - var item = "item"+i
             - var price = "price"+i
             - var slab = "slab"+i
-            - var sum = "sum"+i
-            - var total = "total"+i
-            #{rbody[item]} #{rbody[price]} #{rbody[slab]} #{sum} #{total}
+            - var sum = i*2-2
+            - var total = i*2-1
+            tr
+              td #{rbody[item]}
+              td #{rbody[price]}
+              td #{rbody[slab]}
+              td #{ubody[sum]}
+              td #{ubody[total]}
+          tr
+            th
+            th
+            th
+            th Grand Total
+            th #{ubody[rbody.count*2]}
+
+      div(class="col-md-4")
+        p GST slab breakout
+        canvas(id="chartPic" width="50%" height="50%")
+  script.
+    var ctx = document.getElementById("chartPic").getContext("2d");
+    var cd = {
+      datasets: [{
+          data: [#{chartdata}],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+          ],
+          borderWidth: 1
+      }],
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: ['5%','12%','18%','28%']
+    };
+    var myPieChart = new Chart(ctx,{type: 'pie', data: cd });
