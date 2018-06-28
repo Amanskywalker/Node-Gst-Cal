@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  div.container-responsive
+    div.content
+      h1= title
+      p total number of items #{ubody}
+      div.table-group
+        p
+          - var count = rbody.count
+          - var i = 0
+          while i++ <= count
+            - var item = "item"+i
+            - var price = "price"+i
+            - var slab = "slab"+i
+            - var sum = "sum"+i
+            - var total = "total"+i
+            #{rbody[item]} #{rbody[price]} #{rbody[slab]} #{sum} #{total}

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  div.container-responsive
+    div.content
+      h1 Add List
+      p total number of items #{count}
+      div.form-group
+        form.form-horizontal(action='/result/', method='post')
+          input(class="form-control" type='number', name='count' value= count, hidden)
+
+          - var n = 0;
+          while ++n <= count
+            - var name = "item"+n
+            - var price = "price"+n
+            - var slab = "slab"+n
+            div.row
+              div.col
+                lable Name:
+                input(class='form-control', type='text', name= name)
+              div.col
+                lable Price:
+                input(class='form-control', type='number', name= price)
+              div.col
+                lable GST Slab:
+                select(class='form-control' name= slab)
+                  option(value=5) 5%
+                  option(value=12) 12%
+                  option(value=18) 18%
+                  option(value=28) 28%
+          br
+          input(class="btn btn-primary" type='submit', value='Submit')
